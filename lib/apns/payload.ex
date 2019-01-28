@@ -22,9 +22,9 @@ defmodule APNS.Payload do
     cond do
       length_diff <= 0 -> json
       length_diff >= length_alert -> {:error, :payload_size_exceeded}
-      true ->
-        payload = put_in(payload[:aps][:alert], truncate(payload.aps.alert, length_alert - length_diff))
-        Poison.encode!(payload)
+      true -> {:error, :payload_size_exceeded}
+        # payload = put_in(payload[:aps][:alert], truncate(payload.aps.alert, length_alert - length_diff))
+        # Poison.encode!(payload)
     end
   end
 
